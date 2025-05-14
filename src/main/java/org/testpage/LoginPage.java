@@ -1,6 +1,7 @@
 package org.testpage;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 
 public class LoginPage extends BasePage{
     private By usernameInput = By.cssSelector("input[data-test='username']");
@@ -25,9 +26,22 @@ public class LoginPage extends BasePage{
     }
 
     public String loginInvalid(String username, String password){
-        setInput(usernameInput,username);
-        setInput(passwordInput,password);
-        click(buttonLogin);
+        if (password.isEmpty() || username.isEmpty()){
+            if (username.isEmpty()){
+                findElement(usernameInput).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+                setInput(passwordInput,password);
+            }
+            if (password.isEmpty()){
+                findElement(passwordInput).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+                setInput(usernameInput,username);
+            }
+            click(buttonLogin);
+        } else {
+            setInput(usernameInput,username);
+            setInput(passwordInput,password);
+            click(buttonLogin);
+        }
+
         return  getText(errorMsg);
     }
 
