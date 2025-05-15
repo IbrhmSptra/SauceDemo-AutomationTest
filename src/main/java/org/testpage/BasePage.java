@@ -17,6 +17,10 @@ public class BasePage {
     }
 
     protected void setInput(By locator, String input){
+        if (input.isEmpty()){
+            findElement(locator).sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
+            return;
+        }
         findElement(locator).clear();
         findElement(locator).sendKeys(input);
     }
