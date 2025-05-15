@@ -5,7 +5,7 @@ import org.openqa.selenium.Keys;
 
 public class LoginPage extends BasePage{
     private By usernameInput = By.cssSelector("input[data-test='username']");
-    private  By  passwordInput = By.cssSelector("input[data-test='password']");
+    private  By passwordInput = By.cssSelector("input[data-test='password']");
     private By buttonLogin = By.cssSelector("input[type='submit']");
     private By logo = By.cssSelector("div[class='login_logo']");
     private By errorMsg = By.cssSelector("h3[data-test='error']");
@@ -26,10 +26,9 @@ public class LoginPage extends BasePage{
     }
 
     public String loginInvalid(String username, String password){
-            setInput(usernameInput,username);
-            setInput(passwordInput,password);
-            click(buttonLogin);
-
+        setInput(usernameInput,username);
+        setInput(passwordInput,password);
+        click(buttonLogin);
         return  getText(errorMsg);
     }
 
